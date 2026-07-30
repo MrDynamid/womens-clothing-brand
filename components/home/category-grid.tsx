@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { ScrollReveal } from '@/components/scroll-reveal'
 
 const CATEGORY_TILES = [
   {
@@ -25,7 +26,7 @@ const CATEGORY_TILES = [
 export function CategoryGrid() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-20 md:px-6">
-      <div className="mb-10 flex items-end justify-between">
+      <ScrollReveal className="mb-10 flex items-end justify-between">
         <div>
           <p className="text-xs tracking-[0.2em] text-muted-foreground uppercase">
             Shop by category
@@ -40,27 +41,29 @@ export function CategoryGrid() {
         >
           View all
         </Link>
-      </div>
+      </ScrollReveal>
       <div className="grid gap-4 md:grid-cols-3">
-        {CATEGORY_TILES.map((tile) => (
-          <Link key={tile.label} href={tile.href} className="group relative block">
-            <div className="relative aspect-4/5 overflow-hidden rounded-sm bg-muted">
-              <Image
-                src={tile.image}
-                alt={tile.label}
-                fill
-                sizes="(min-width: 768px) 33vw, 100vw"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 text-background">
-                <p className="text-[11px] tracking-[0.18em] uppercase opacity-90">
-                  {tile.caption}
-                </p>
-                <h3 className="mt-1 font-serif text-2xl tracking-tight">{tile.label}</h3>
+        {CATEGORY_TILES.map((tile, i) => (
+          <ScrollReveal key={tile.label} direction="up" delay={i * 120}>
+            <Link href={tile.href} className="group relative block">
+              <div className="relative aspect-4/5 overflow-hidden rounded-sm bg-muted">
+                <Image
+                  src={tile.image}
+                  alt={tile.label}
+                  fill
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent" />
+                <div className="absolute bottom-0 left-0 p-6 text-background">
+                  <p className="text-[11px] tracking-[0.18em] uppercase opacity-90">
+                    {tile.caption}
+                  </p>
+                  <h3 className="mt-1 font-serif text-2xl tracking-tight">{tile.label}</h3>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </ScrollReveal>
         ))}
       </div>
     </section>

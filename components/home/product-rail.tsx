@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ProductCard } from '@/components/product-card'
+import { ScrollReveal } from '@/components/scroll-reveal'
 import type { Product } from '@/lib/products'
 
 export function ProductRail({
@@ -19,7 +20,7 @@ export function ProductRail({
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-10 md:px-6">
-      <div className="mb-10 flex items-end justify-between">
+      <ScrollReveal className="mb-10 flex items-end justify-between">
         <div>
           <p className="text-xs tracking-[0.2em] text-muted-foreground uppercase">
             {eyebrow}
@@ -32,10 +33,12 @@ export function ProductRail({
         >
           View all
         </Link>
-      </div>
+      </ScrollReveal>
       <div className="grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-4">
         {products.map((product, i) => (
-          <ProductCard key={product.id} product={product} priority={priority && i < 4} />
+          <ScrollReveal key={product.id} direction="up" delay={(i % 4) * 100}>
+            <ProductCard product={product} priority={priority && i < 4} />
+          </ScrollReveal>
         ))}
       </div>
     </section>
